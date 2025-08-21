@@ -113,7 +113,7 @@ async def handle_message(message: types.Message):
             messages,
             strategy="last",
             token_counter=count_tokens_approximately,
-            max_tokens=5000,
+            max_tokens=1500,
             start_on="human",
             end_on=("human", "tool"),
             include_system=True,
