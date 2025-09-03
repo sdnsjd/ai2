@@ -12,6 +12,7 @@ bot = Bot(token=telegram_key)
 
 def make_config(thread_id: str) -> RunnableConfig:
     return RunnableConfig(
+        recursion_limit=7,
         configurable={
             "thread_id": thread_id,
             "checkpoint_ns": CHECKPOINT_NS,
@@ -95,7 +96,7 @@ async def handle_message(message: types.Message):
     checkpoint_tuple = await memorysave.aget_tuple(config)
     if checkpoint_tuple and checkpoint_tuple.checkpoint:
         checkpoint = checkpoint_tuple.checkpoint.copy()
-        metadata = checkpoint_tuple.metadata  # ✅ берём отсюда
+        metadata = checkpoint_tuple.metadata  
         current_versions = checkpoint["channel_versions"]
         channel = "messages"
         prev_version_str = current_versions.get(channel, "0")
@@ -105,7 +106,7 @@ async def handle_message(message: types.Message):
         new_version = prev_version + 1
         new_version_str = f"{new_version:032d}"
         checkpoint["channel_versions"][channel] = new_version_str
-        new_versions: ChannelVersions = {channel: new_version_str}  # ✅ формируем здесь
+        new_versions: ChannelVersions = {channel: new_version_str}  
 
         # обрезаем сообщения
         messages = checkpoint["channel_values"]["messages"]
@@ -113,7 +114,7 @@ async def handle_message(message: types.Message):
             messages,
             strategy="last",
             token_counter=count_tokens_approximately,
-            max_tokens=1500,
+            max_tokens=2500,
             start_on="human",
             end_on=("human", "tool"),
             include_system=True,
