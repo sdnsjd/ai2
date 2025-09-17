@@ -1,9 +1,9 @@
-aiogram>=3.20.0
-langchain>=0.3.25
-langchain-core>=0.3.67  
-langchain-community>=0.3.24
-langchain-text-splitters>=0.3.8
-langchain-chroma>=0.2.4
-langchain-gigachat>=0.3.10
-langgraph>=0.6.5
+aiogram==3.22.0
+langchain==0.3.27
+langchain-core==0.3.76
+langchain-community==0.3.29
+langchain-text-splitters==0.3.11
+langchain-chroma==0.2.6
+langchain-gigachat==0.3.12
+langgraph==0.6.7
 python-dotenv==1.1.0
